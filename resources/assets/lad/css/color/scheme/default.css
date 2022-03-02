@@ -1,0 +1,45 @@
+/*
+| Color Primary #12232E Shadow #203647
+| Color Accent #007CC7 Lightest #4DA8DA Shadow #EEFBFB
+| Color Light #F9F9F9
+*/
+
+
+.sidebar {
+  box-shadow: #203647;
+}
+
+.sidebar-wrapper, .sidebar-bg-color {
+  background-color: #12232E;
+}
+
+.sidebar-toggle {
+  background-color: #12232E !important;
+  border: 0.5px solid #007CC7 !important;
+}
+.sidebar-toggle-icon {
+  color: #007CC7 !important;
+}
+.sidebar-nav-item .sidebar-nav-link {
+  color: #4DA8DA !important;
+}
+.sidebar .collapse-header {
+  color: #F9F9F9 !important;
+}
+.sidebar .collapse-item {
+  color: #F9F9F9 !important;
+}
+
+.sidebar.toggled .collapse-header, .sidebar.toggled .collapse-item {
+  color: #12232E !important;
+}
+.sidebar.toggled .collapse .collapse-inner {
+  background-color: #FFF !important;
+}
+
+.navbar .navbar-icon {
+  color: #12232E !important;
+}
+.navbar .navbar-icon:hover {
+  color: #007CC7 !important;
+}

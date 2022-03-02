@@ -1,0 +1,41 @@
+{
+    "name": "stephendevs/lad",
+    "description" : "Larevel Admin Dashboard",
+    "keywords": [
+        "laravel admin dashboard",
+        "admin authentication",
+        "laravel"
+    ],
+    "homepage": "https://github.com/stephendevs/lad",
+    "type" : "project",
+    "license" : "MIT",
+    "authors" : [
+        {
+            "name" : "Stephen Okello Omoding",
+            "email" : "okellostephenomoding@gmail.com",
+            "role" : "Developer"
+        }
+    ],
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Stephendevs\\Lad\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Stephendevs\\Lad\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Stephendevs\\Lad\\Providers\\LadServiceProvider"
+            ]
+        }
+    }
+}
