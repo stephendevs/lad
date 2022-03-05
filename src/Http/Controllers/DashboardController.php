@@ -28,4 +28,6 @@ class DashboardController extends Controller
     {
         return view(config('lad.home', 'lad::index'));
     }
+
+
 }

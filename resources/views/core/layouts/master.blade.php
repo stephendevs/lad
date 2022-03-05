@@ -45,6 +45,26 @@
             <!-- Page Content -->
             <div id="content-wrapper" class=" content-wrapper d-flex flex-column body-bg-color">
                 <div class="content">
+                    <div class="alerts">
+                        <div class="alert {{ session('deleted') ? 'alert-warning' : 'alert-success' }} alert-dismissible fade {{ (session('updated') || session('created') || session('edited')) ? 'show' : '' }}" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                          <strong>
+                              Operation: 
+                          </strong>
+                          @if (session('updated'))
+                                  {{ session('updated') }}
+                              @elseif(session('created'))
+                                  {{ session('created') }}
+                              @elseif(session('edited'))
+                                  {{ session('edited') }}
+                              @elseif(session('deleted'))
+                                  {{ session('deleted') }}
+                              @endif
+                        </div>
+                    </div>
+                     
                     <!-- navbar =-->
                     <header class="header container-fluid navbar-wrapper" id="header">
                         @include('lad::core.includes.navbar.navbar')
@@ -52,15 +72,13 @@
                     <!-- //navbar -->
 
                     <!-- Page Heading -->
-                      <div class="container-fluid mb-4">
+                      <div class="container-fluid mb-4 pt-4">
                           <div class="row">
                               <div class="col-12 col-lg-6"><h1 class="h3 mb-0 text-gray-800 page-heading">@yield('pageHeading')</h1></div>
                               <div class="col-12 col-lg-6 mt-4 mt-lg-0 text-lg-right text-center pr-5 page-actions"> @yield('pageActions')</div>
                           </div>
                       </div>
-                      <div class="container-fluid pl-5 page-actions">
-                         
-                      </div>
+                      <div class="container-fluid pl-5 page-actions"></div>
 
                     <!-- Begin Page Content -->
                     @yield('content')
@@ -68,10 +86,12 @@
                 </div>
 
                
-
+                
             </div>
            
         </div>
+
+       
 
     </body>
 

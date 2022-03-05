@@ -559,6 +559,19 @@ form label {
 }
 
 
+.alerts {
+  background-color: transparent;
+  position: absolute;
+  height: auto;
+  width: 60%;
+  z-index: 999;
+  right: 20%;
+}
+
+.alerts .alert {
+  border-radius: 0%;
+}
+
 
 
 
