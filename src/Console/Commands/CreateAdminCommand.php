@@ -9,7 +9,7 @@ use Stephendevs\Lad\Models\Permission\Permission;
 use Illuminate\Support\Str;
 
 
-class CreateAdmin extends Command
+class CreateAdminCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -77,7 +77,7 @@ class CreateAdmin extends Command
             $admin->user()->create([
                 'name' => str_replace(' ', '.', $admin->last_name.' '.$admin->last_name),
                 'email' => $email,
-                'password' => $password,
+                'password' => bcrypt($password),
                 'email_verified_at' => now(),
                 'remember_token' => Str::random(10)
             ]);

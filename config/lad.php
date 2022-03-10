@@ -76,5 +76,7 @@ return [
     'srt::lad.sidebar.requiremments',
   ],
 
+  'pagman' => true,
+
 
 ];

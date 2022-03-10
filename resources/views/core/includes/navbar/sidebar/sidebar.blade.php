@@ -24,15 +24,15 @@
     <!--<hr class="sidebar-divider">-->
   
     <!-- include sidebar navitem links for other integrated packages or modules -->
-    @php
-        $navitems = config('lad.sidebar_navitems', []);
-    @endphp
-    @if (count($navitems))
-        @for ($i = 0; $i < count($navitems); $i++)
-             @includeIf($navitems[$i])
-        @endfor
-    @else
-        @includeIf('phoebi::core.includes.navbar.sidebar.packageLinks')
+    @if (config('lad.pagman', false))
+        @if (count(config('pagman.sidebar_navitems', [])))
+          @php
+              $navitems = config('pagman.sidebar_navitems', []);
+          @endphp
+          @for ($i = 0; $i < count($navitems); $i++)
+            @includeIf($navitems[$i])
+          @endfor
+        @endif
     @endif
 
   
@@ -48,6 +48,7 @@
       <div id="collapseUsers" class="collapse sidebar-collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="py-2 collapse-inner rounded">
           <h6 class="collapse-header">Manage Users:</h6>
+          <a class="collapse-item" href="{{ route('lad.users') }}">All Users</a>
           <a class="collapse-item" href="{{ route('lad.admins') }}">Admins</a>
         </div>
       </div>
@@ -61,8 +62,11 @@
       </a>
       <div id="collapseSettings" class="collapse sidebar-collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{{ route('lad.settings') }}">Lad <i class="fa fa-mars float-right" style="font-size: 0.89rem;"></i></a>
-          <a class="collapse-item" href="">Students</a>
+          <a class="collapse-item" href="{{ route('lad.settings') }}">System Settings <i class="fa fa-mars float-right" style="font-size: 0.89rem;"></i></a>
+          <!-- CMS Settings -->
+          @if (config('lad.pagman', false))
+            <a class="collapse-item" href="{{ route('pagman.settings') }}">CMS Settings</a>
+          @endif
         </div>
       </div>
     </li>

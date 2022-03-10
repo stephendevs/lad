@@ -14,7 +14,7 @@ use Stephendevs\Phoebi\Http\Middleware\Admin\AdminStatus;
 
 
 //commands
-use Stephendevs\Lad\Console\Commands\CreateAdmin;
+use Stephendevs\Lad\Console\Commands\CreateAdminCommand;
 use Stephendevs\Lad\Console\Commands\CacheOption;
 use Stephendevs\Lad\Console\Commands\SeedPermissions;
 use Stephendevs\Lad\Console\Commands\SetEnv;
@@ -58,7 +58,7 @@ class LadServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
 
             $this->commands([
-                CreateAdmin::class,
+                CreateAdminCommand::class,
                 CacheOption::class,
                 SeedPermissions::class,
                 SetEnv::class,

@@ -17,7 +17,7 @@
         <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
 
         <link href="{{ asset('lad/css/lad.css') }}" rel="stylesheet">
-        <link href="{{ asset('lad/css/color/scheme/default.css') }}" rel="stylesheet">
+        <link href="{{ asset('lad/css/color/scheme/default.css') }}" rel="stylesheet" />
         @yield('requiredCss')
 
 

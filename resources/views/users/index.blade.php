@@ -12,13 +12,13 @@
        <div class="container-fluid">
            <div class="row">
                
-            <div class="col-lg-8">
+            <div class="col-lg-12">
 
                 <div class="card">
                     <div class="card-body">
                         @if (count($users))
                         <div class="table-responsive">
-                            <table class="table table-bordred table-striped">
+                            <table class="table table-borderless">
                                 <thead>
                                     <th><input type="checkbox" id="checkall" /></th>
                                     <th>Name</th>
