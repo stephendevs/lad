@@ -11,8 +11,7 @@ class CliController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:'.config('lad.base.auth_guard', 'admin'));
-        $this->middleware('permission:cmd');
+        ///$this->
     }
     public function index()
     {
