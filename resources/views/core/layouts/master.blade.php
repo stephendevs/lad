@@ -45,23 +45,27 @@
             <!-- Page Content -->
             <div id="content-wrapper" class=" content-wrapper d-flex flex-column body-bg-color">
                 <div class="content">
-                    <div class="alerts">
-                        <div class="alert {{ session('deleted') ? 'alert-warning' : 'alert-success' }} alert-dismissible fade {{ (session('updated') || session('created') || session('edited')) ? 'show' : '' }}" role="alert">
+                    <div class="alerts mt-1">
+                        <div class="alert {{ session('deleted')  ? 'alert-warning' : 'alert-success' }} alert-dismissible fade {{ (session('updated') || session('deleted') || session('created') || session('edited') || session('success')) ? 'show' : '' }}" role="alert" id="alert">
                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                           <strong>
-                              Operation: 
+                              Operation Was Succesful: 
                           </strong>
-                          @if (session('updated'))
-                                  {{ session('updated') }}
-                              @elseif(session('created'))
-                                  {{ session('created') }}
-                              @elseif(session('edited'))
-                                  {{ session('edited') }}
-                              @elseif(session('deleted'))
-                                  {{ session('deleted') }}
-                              @endif
+                          <span class="message-holder">
+                             @if (session('updated'))
+                                {{ session('updated') }}
+                            @elseif(session('created'))
+                                {{ session('created') }}
+                            @elseif(session('edited'))
+                                {{ session('edited') }}
+                            @elseif(session('deleted'))
+                                {{ session('deleted') }}
+                            @elseif(session('success'))
+                                {{ session('success') }}
+                            @endif
+                          </span>
                         </div>
                     </div>
                      

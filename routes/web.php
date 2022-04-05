@@ -90,7 +90,8 @@ Route::middleware(config('lad.middlewares', 'web'))->group(function () {
 
 
         Route::get('/artisans', [ArtisanController::class, 'index'])->name('lad.artisans');
-        Route::get('/artisans/run/{command}', [ArtisanController::class, 'run'])->name('lad.artisans.run');
+        Route::post('/artisans/run', [ArtisanController::class, 'run'])->name('lad.artisans.run');
+        Route::get('/artisans/common/run/{command}/{options?}', [ArtisanController::class, 'runCommon'])->name('lad.artisans.run.common');
 
         Route::get('/cli', [CliController::class, 'index'])->middleware('permission:cmd')->name('lad.cli');
         Route::post('/cli', [CliController::class, 'run'])->middleware('permission:cmd')->name('lad.cli');

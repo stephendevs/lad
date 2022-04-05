@@ -28,7 +28,7 @@ trait UpdatesOrCreatesOptions
                    'owner_id' => '0',
                    'owner_type' => 'system'
                ]
-           ) : Option::updateOrCreate(['option_key' => $key], ['option_value' => $value[0], 'owner_id' => '0','owner_type' => 'system']);
+           ) : ''; //Option::updateOrCreate(['option_key' => $key], ['option_value' => $value[0], 'owner_id' => '0','owner_type' => 'system']);
         }
         return ($request->expectsJson()) ? response()->json([
             'success' => true, 'message' => 'Options updated successfully'
