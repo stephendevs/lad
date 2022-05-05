@@ -12,21 +12,21 @@ use Illuminate\Support\Facades\Cache;
 use Stephendevs\Lad\Models\Option\Option;
 
 
-class CacheOption extends Command
+class OptionsClearCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'cache:option';
+    protected $signature = 'options:clear';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '';
+    protected $description = 'Clear all options from cache';
 
     /**
      * Create a new command instance.
@@ -48,15 +48,13 @@ class CacheOption extends Command
         $options = Option::all();
         if(count($options)){
             foreach ($options as $item) {
-                # code...
-                Cache::forever($item->option_key, $item->option_value);
-            }
-            $this->info('Done caching options.');
+                Cache::forget($item->option_key);
+            } 
+            $this->info('All options removed from cache');
         }else{
-            $this->info('No options to cache');
+            $this->info('No options to clear');
         }
     }
-
 
     
 }

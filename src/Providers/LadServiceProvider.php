@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Routing\Router;
 
+
+/**
+ * Middleware
+ */
 use Stephendevs\Lad\Http\Middleware\Permission\Permission;
 use Stephendevs\Lad\Http\Middleware\UserType\UserTypeMiddleware;
 
@@ -13,11 +17,33 @@ use Stephendevs\Lad\Http\Middleware\Admin\IsSuperAdmin;
 use Stephendevs\Phoebi\Http\Middleware\Admin\AdminStatus;
 
 
-//commands
+/**
+ * Artisan Commands
+ */
 use Stephendevs\Lad\Console\Commands\CreateAdminCommand;
-use Stephendevs\Lad\Console\Commands\CacheOption;
+use Stephendevs\Lad\Console\Commands\OptionsCacheCommand;
+use Stephendevs\Lad\Console\Commands\OptionsClearCommand;
+
 use Stephendevs\Lad\Console\Commands\SeedPermissions;
 use Stephendevs\Lad\Console\Commands\SetEnv;
+
+/**
+ * Repositories
+ */
+use Stephendevs\Lad\Repository\EloquentRepositoryInterface;
+use Stephendevs\Lad\Repository\Eloquent\BaseRepository;
+use Stephendevs\Lad\Repository\UserRepositoryInterface;
+use Stephendevs\Lad\Repository\Eloquent\UserRepository;
+
+/**
+ * Event Observers
+ */
+use Stephendevs\Lad\Observers\OptionObserver;
+
+use Stephendevs\Lad\Models\Option\Option;
+
+
+
 
 class LadServiceProvider extends ServiceProvider
 {
@@ -41,6 +67,9 @@ class LadServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->bind(EloquentRepositoryInterface::class, BaseRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+
         $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
 
@@ -55,11 +84,14 @@ class LadServiceProvider extends ServiceProvider
         $router->aliasMiddleware('usertype', UserTypeMiddleware::class);
         $router->aliasMiddleware('adminstatus', AdminStatus::class);
 
+        Option::observe(OptionObserver::class);
+
         if ($this->app->runningInConsole()) {
 
             $this->commands([
                 CreateAdminCommand::class,
-                CacheOption::class,
+                OptionsCacheCommand::class,
+                OptionsClearCommand::class,
                 SeedPermissions::class,
                 SetEnv::class,
             ]);

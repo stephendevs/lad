@@ -20,7 +20,7 @@ trait UpdatesOrCreatesOptions
     public function updateOrCreate(Request $request)
     {
         $request->validate($this->rules(), $this->validationErrorMessages());
-        
+
         foreach ($this->options() as $key => $value) {
            ($request->has($key)) ? Option::updateOrCreate(
                ['option_key' => $key], [
@@ -28,7 +28,7 @@ trait UpdatesOrCreatesOptions
                    'owner_id' => '0',
                    'owner_type' => 'system'
                ]
-           ) : ''; //Option::updateOrCreate(['option_key' => $key], ['option_value' => $value[0], 'owner_id' => '0','owner_type' => 'system']);
+           ) : Option::updateOrCreate(['option_key' => $key], ['option_value' => $value[0], 'owner_id' => '0','owner_type' => 'system']);
         }
         return ($request->expectsJson()) ? response()->json([
             'success' => true, 'message' => 'Options updated successfully'
@@ -50,7 +50,7 @@ trait UpdatesOrCreatesOptions
     protected function options() : array 
     {
         return [
-            'option_key' => ['option_default_value', 'ignoreOnUpdate'],
+            //'option_key' => ['option_default_value', 'ignoreOnUpdate'],
         ];
     }
 

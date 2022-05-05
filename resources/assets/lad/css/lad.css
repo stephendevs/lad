@@ -512,7 +512,12 @@ h1.page-heading {
 /*--------------------------------------------------------------
 # CARDS
 --------------------------------------------------------------*/
-
+.card{
+  background-color: transparent !important;
+  border: 0.1rem solid #dcdcdc !important;
+  box-shadow: none !important;
+  margin-bottom: 5px;
+}
 .card .card-header h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 0px;
 	font-size: 14px;
@@ -545,10 +550,7 @@ form label {
   font-size: 0.75rem;
   font-weight: 500;
 }
-.card {
-  border: 0.1rem solid #dcdcdc !important;
-  margin-bottom: 5px;
-}
+
 .dropdown-toggle::after {
   content: none;
 }
@@ -571,6 +573,12 @@ form label {
   border-radius: 0%;
 }
 
-
+.sticky-lg{
+    position: relative;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 50px;
+    height: 20%;
+}
 
 

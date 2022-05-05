@@ -78,8 +78,8 @@
                     <!-- Page Heading -->
                       <div class="container-fluid mb-4 pt-4">
                           <div class="row">
-                              <div class="col-12 col-lg-6"><h1 class="h3 mb-0 text-gray-800 page-heading">@yield('pageHeading')</h1></div>
-                              <div class="col-12 col-lg-6 mt-4 mt-lg-0 text-lg-right text-center pr-5 page-actions"> @yield('pageActions')</div>
+                              <div class="col-12 col-lg-2"><h1 class="h3 mb-0 text-gray-800 page-heading">@yield('pageHeading')</h1></div>
+                              <div class="col-12 col-lg-10 mt-4 mt-lg-0 text-lg-right text-center page-actions"> @yield('pageActions')</div>
                           </div>
                       </div>
                       <div class="container-fluid pl-5 page-actions"></div>

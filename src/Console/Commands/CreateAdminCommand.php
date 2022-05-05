@@ -56,7 +56,6 @@ class CreateAdminCommand extends Command
 
             $email = 'admin@lad.com';
             $password = bcrypt('secret');
-
         } else {
             # code...
             $first_name = $this->ask('Enter First Name ..');
