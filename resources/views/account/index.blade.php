@@ -48,8 +48,8 @@
                                 <img src="{{ asset('lad/img/avator.jpg') }}" alt="avator" class="img-fluid rounded-circle shadow-sm" />
                             </div>
                             <div class="col-lg-9" style="text-transform: capitalize;">
-                                <h1>{{ ($account->user) ? $account->user->name : $account->first_name.' '.$account->last_name }}</h1><hr />
-                                <h6>{{$account->first_name.' '.$account->last_name}}</h6>
+                                <h1>{{ $account->name }}</h1><hr />
+                                <h6>{{$account->userable->last_name.' '.$account->userable->first_name}}</h6>
                             </div>
                         </div>
                        </div>

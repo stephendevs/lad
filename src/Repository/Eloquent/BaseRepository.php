@@ -15,7 +15,6 @@ class BaseRepository implements EloquentRepositoryInterface
         $this->model = $model;
     }
 
-
     public function all(array $columns = ['*'], array $relations = []) : Collection
     {
         return $this->model->with($relations)->get($columns);

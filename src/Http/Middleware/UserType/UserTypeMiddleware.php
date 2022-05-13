@@ -19,7 +19,7 @@ class UserTypeMiddleware
     public function handle($request, Closure $next, $usertype, $guard = null)
     {
         if ($user = auth($guard)->user()) {
-            $userableTypeNamespace = explode('\\', $user->user_type);
+            $userableTypeNamespace = explode('\\', $user->userable_type);
 
             if (end($userableTypeNamespace) === Str::studly($usertype)) {
                 return $next($request);

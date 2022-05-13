@@ -8,7 +8,7 @@ use Stephendevs\Lad\Http\Controllers\Auth\ForgotPasswordController;
 use Stephendevs\Lad\Http\Controllers\Auth\ResetPasswordController;
 
 use Stephendevs\Lad\Http\Controllers\Admin\AdminController;
-use Stephendevs\Lad\Http\Controllers\Admin\AdminPermissionController;
+use Stephendevs\Lad\Http\Controllers\Admin\AdminPermissionContproller;
 use Stephendevs\Lad\Http\Controllers\Admin\AdminQuickCreateController;
 use Stephendevs\Lad\Http\Controllers\Admin\AdminStatusController;
 use Stephendevs\Lad\Http\Controllers\Admin\AdminActivityLogController;
@@ -32,15 +32,14 @@ use Stephendevs\Lad\Http\Controllers\Mailer\ContactFormController;
 use Stephendevs\Lad\Http\Controllers\Mailer\MailTemplatesController;
 use Stephendevs\Lad\Http\Controllers\Mailer\TestContactFormController;
 
+Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
 
-
-
-Route::middleware(config('lad.middlewares', 'web'))->group(function () {
-
-    Route::prefix(config('lad.route_prefix', 'dashboard'))->group(function () {
-
+    Route::group(['middleware' => ['web','guest:auth']], function(){
         Route::get('/login', [AuthController::class, 'index'])->name('lad.login');
         Route::post('/login', [AuthController::class, 'login'])->name('lad.login');
+    });
+
+    Route::group(['middleware' => ['web','auth']], function(){
         Route::post('/logout', [AuthController::class, 'logout'])->name('lad.logout');
 
         Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('lad.password.resetEmailForm');
@@ -57,15 +56,14 @@ Route::middleware(config('lad.middlewares', 'web'))->group(function () {
         Route::get('/account/notifications', [AccountNotificationController::class, 'index'])->name('lad.account.notifications');
 
        Route::get('/account/status/alert', [AccountStatusController::class, 'index'])->name('ldashboardAccountBlockedAlert');
-
         /**
          * Managing admins routes
          */
-        Route::get('/admins', [AdminController::class, 'index'])->middleware(['permission:view_users'])->name('lad.admins');
-        Route::get('/admins/create', [AdminController::class, 'create'])->middleware(['permission:create_users'])->name('lad.admins.create');
-        Route::post('/admins/store', [AdminController::class, 'store'])->middleware(['permission:create_users'])->name('lad.admins.store');
-        Route::get('/admins/{username}/{id}', [AdminController::class, 'show'])->middleware(['permission:view_users'])->name('lad.admins.show');
-        Route::get('/admins/edit/{username}/{id}', [AdminController::class, 'edit'])->middleware(['permission:edit_users'])->name('lad.admins.edit');
+        Route::get('/admins', [AdminController::class, 'index'])->name('lad.admins');
+        Route::get('/admins/create', [AdminController::class, 'create'])->name('lad.admins.create');
+        Route::post('/admins/store', [AdminController::class, 'store'])->name('lad.admins.store');
+        Route::get('/admins/{username}/{id}', [AdminController::class, 'show'])->name('lad.admins.show');
+        Route::get('/admins/edit/{username}/{id}', [AdminController::class, 'edit'])->name('lad.admins.edit');
         Route::post('/admins/update/{id}', [AdminController::class, 'update'])->name('lad.admins.update');
         Route::get('/admins/trash/{id}', [AdminController::class, 'destroy'])->name('lad.admins.destroy');
 
@@ -116,17 +114,6 @@ Route::middleware(config('lad.middlewares', 'web'))->group(function () {
         Route::post('/contact-us/sendmail', [TestController::class, 'send'])->name('lad.test');
 
         Route::get('/contact-us/render', [TestController::class, 'render']);
-
-
-
-
     });
-
-    
-
-
-    
-
-
-
 });
+

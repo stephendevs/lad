@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
 use Stephendevs\Lad\Models\Admin\Admin;
+use App\User;
 
 
 class DashboardController extends Controller
@@ -26,6 +27,9 @@ class DashboardController extends Controller
    
     public function index(Request $request)
     {
+        $permissions = auth()->user()->permissions;
+        
+
         return view(config('lad.home', 'lad::index'));
     }
 

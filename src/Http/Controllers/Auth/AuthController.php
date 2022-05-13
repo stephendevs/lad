@@ -7,9 +7,7 @@ use Stephendevs\Lad\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use Stephendevs\Lad\Models\Admin\Admin;
-
-
+use App\User;
 
 class AuthController extends Controller
 {
@@ -46,13 +44,13 @@ class AuthController extends Controller
             'password' => 'required|min:6'
         ]);
 
-
         if(Auth::attempt([
             'email' => $request->email, 
             'password' => $request->password
         ], $request->get('remember'))){
             return redirect()->intended(config('lad.route_prefix', '/dashboard'));
         }
+        
         return back()
         ->withInput($request->only('email','remember'))
         ->with('failed', true)
@@ -78,7 +76,7 @@ class AuthController extends Controller
             'email' => 'required|email'
         ]);
 
-        $find = Admin::where('email', $request->email)->get(['email']);
+        $find = User::where('email', $request->email)->get(['email']);
 
 
         if(count($find) == 1){

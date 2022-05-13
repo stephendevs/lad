@@ -4,17 +4,15 @@ namespace Stephendevs\Lad\Http\Controllers;
 
 use Stephendevs\Lad\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use Stephendevs\Lad\Repository\UserRepositoryInterface;
 use App\User;
+
+
 
 class UserController extends Controller
 {
-    protected $userRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct()
     {
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -24,8 +22,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return $this->userRepository->keys();
-        $users = $this->userRepository->paginate(4);
+        
+
+
+
+        $users = User::with(['roles'])->paginate(4);
         return view('lad::users.index', compact(['users']));
     }
     
@@ -37,13 +38,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = $this->userRepository->delete($id);
-        
+        User:;destroy($id);
         return (request()->expectsJson()) ? response()->json([
             'success' => true,
             'message' => 'User deleted successfully'
         ], 200) : back()->with('deleted', 'User Deleted successfully.');
-
     }
 
 }

@@ -14,7 +14,8 @@ use Stephendevs\Lad\Notifications\Admin\AdminStatusNotification;
 
 use Stephendevs\Lad\Traits\ActivityLogable;
 
-use Stephendevs\Lad\Traits\UserTypeModel as User;
+use Stephendevs\Lad\Userable;
+use Stephendevs\Lad\Permissionable;
 
 
 class Admin extends Authenticatable implements MustVerifyEmail, CanResetPassword
@@ -22,7 +23,8 @@ class Admin extends Authenticatable implements MustVerifyEmail, CanResetPassword
     use Notifiable;
     use IsAdmin;
     use ActivityLogable;
-    use User;
+    use Userable;
+    use Permissionable;
 
 
     /**
@@ -46,12 +48,5 @@ class Admin extends Authenticatable implements MustVerifyEmail, CanResetPassword
       $this->table = lad_auth_table();
     }
 
-public function permissions()
-{
-  return $this->morphMany('Stephendevs\Lad\Models\Permission\HasPermission', 'model');
-}
-
-
-   
 
 }

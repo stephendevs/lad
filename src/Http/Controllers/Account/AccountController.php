@@ -5,8 +5,6 @@ namespace Stephendevs\Lad\Http\Controllers\Account;
 use Stephendevs\Lad\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Stephendevs\Lad\Models\Admin\Admin;
-
 class AccountController extends Controller
 {
 
@@ -23,7 +21,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $account = Admin::with(['user'])->findOrFail(auth()->user()->user_id);
+        $account = auth()->user();
         return view('lad::account.index', compact(['account']));
     }
 

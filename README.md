@@ -1,10 +1,4 @@
-[![](https://raw.githubusercontent.com/stephendevs/stephendevs/main/img/lad.bannner.png)](ttps://www.linkedin.com/in/stephendevs)
-
-# Lad 👋, 
-
-## Laravel Admin Dashboard
-This is a quick laravel admin panel package.
-
+[![](https://raw.githubusercontent.com/stephendevs/stephendevs/main/lad/lad.png)](ttps://www.linkedin.com/in/stephendev)
 
 ---
 
@@ -65,13 +59,6 @@ php artisan set:env MAIL_FROM_NAME mail_from_name --config=mail.from.name
 
 ---
 
-### Login To Dashboard
-1. ###### Create super admin account
 ```php
-php artisan create:admin --default --super
+https://yourdomain.com/dashboard
 ```
-```php
-http://127.0.0.1:8000/dashboard
-```
-Then login using `admin@lad.com` as email and `secret` as the password.
----

@@ -17,7 +17,7 @@ return [
     |--------------------------------------------------------------------------
     | The value is the array of additional middlewares to further protect dashboard
     */
-    'middlewares' => ['web'],
+    'middlewares' => ['web', 'auth'],
 
     'app_name' => env('LAD_APP_NAME', 'dashboard'),
 

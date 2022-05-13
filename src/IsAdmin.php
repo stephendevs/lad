@@ -70,10 +70,6 @@ trait IsAdmin {
         }
     }
 
-    public function permissions()
-    {
-        return $this->hasMany('Stephendevs\Lad\Models\Permission\Permission');
-    }
 
     public function colorSchemes()
     {

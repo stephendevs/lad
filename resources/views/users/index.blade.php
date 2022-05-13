@@ -32,7 +32,7 @@
                                             <td><input type="checkbox" class="checkthis" /></td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->user_type }}</td>
+                                            <td>{{ __($user->userType) }}</td>
                                             <td>{{ ($user->created_at) ? $user->created_at->toFormattedDateString() : $user->created_at }}</td>
                                             <td>
                                                 <a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
