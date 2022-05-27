@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Favicon-->
-        <link rel="shortcut icon" href="{{ asset('stephendevs/lad/img/favicon.png') }}" />
+        <link rel="shortcut icon" href="{{ asset('lad/img/favicon.png') }}" />
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -25,7 +25,7 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('lad/js/lad.js') }}" defer></script>
 
-        <!-- include required js files for specific pages -->
+        <!-- include required js files for specific pages remember defer-->
         @yield('requiredJs')
 
 
@@ -33,8 +33,6 @@
     <body>
 
         <div class="d-flex" id="wrapper">
-
-           
 
             <!-- Sidebar Wrapper-->
             <div id="sideBarWrapper" class="sidebar-wrapper sidebar-toggledd">
@@ -78,8 +76,9 @@
                     <!-- Page Heading -->
                       <div class="container-fluid mb-4 pt-4">
                           <div class="row">
-                              <div class="col-12 col-lg-2"><h1 class="h3 mb-0 text-gray-800 page-heading">@yield('pageHeading')</h1></div>
-                              <div class="col-12 col-lg-10 mt-4 mt-lg-0 text-lg-right text-center page-actions"> @yield('pageActions')</div>
+                              <div class="col-12 col-lg-3"><h1 class="h3 mb-0 text-gray-800 page-heading">@yield('pageHeading')</h1></div>
+                              <div class="col-12 col-lg-6  page-actions">@yield('pageActions')</div>
+                              <div class="col-lg-3">@yield('right')</div>
                           </div>
                       </div>
                       <div class="container-fluid pl-5 page-actions"></div>
@@ -100,3 +99,5 @@
     </body>
 
 </html>
+
+

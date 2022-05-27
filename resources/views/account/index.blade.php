@@ -9,74 +9,71 @@
     Account Profile
 @endsection
 
+@section('pageActions')
+@endsection
+
 @section('content')
     <section>
         <div class="container-fluid">
            <div class="row">
 
-            <div class="col-lg-12">
-                <div class="alert alert-primary alert-dismissible fade {{ (session('updated')) ? 'show' : 'd-none' }}" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <strong>Holy guacamole!</strong> {{ session('updated') }}
+            <div class="col-lg-3">
+                <div class="col-12">
+                    <img src="{{ asset('lad/img/avator.jpg') }}" alt="avator" class="img-fluid rounded-circle mb-3 ml-3 w-75" />
+                    <form action="" class="edit-account-avator">
+                        <label for="file-upload" class="custom-file-upload">
+                            <i class="fa fa-camera"></i>
+                        </label>
+                        <input id="file-upload" type="file"/>
+                    </form>
                 </div>
-            </div>
+                <div class="pl-3">
+                    <h1 class="mb-2">{{$account->userable->last_name.' '.$account->userable->first_name}}</h1>
+                    <h6>{{ $account->name }}</h6>
+                    <hr />
+                    <small><b>Social Links</b></small><br />
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-instagram"></i></a><br />
+                    <small><b>Account Age</b></small><span class="badge badge-primary ml-2">20 Yrs</span><hr />
 
-            <div class="col-lg-2 sticky-lg">
-                <div class="card shadow-sm">
+                    <a href="" class="btn btn-sm btn-success mt-2 w-50"><i class="fa fa-edit"></i> Edit Profile</a><hr />
+                </div>
+                
+            </div>
+            
+            <div class="col-lg-6 p-0">
+                <div class="card">
                     <div class="card-body">
-                        <nav class="nav">
-                          <a class="nav-link" href="#">Account</a>
-                          <a class="nav-link" href="{{ route('lad.account.settings') }}">Account Settings</a>
-                          <a class="nav-link" href="#">Authentication</a>
-                          <a class="nav-link" href="#">Password Management</a>
-                          <a class="nav-link" href="#">Color Scheme</a>
-                        </nav>
-                        
+                        <h4>Account Role <small>Your Roles</small></h4>
+                        @if (count($account->roles))
+                            @foreach ($account->roles as $role)
+                                <small class="text-capitalize pr-4">{{ $role->role }}</small>
+                            @endforeach
+                        @else
+                            
+                        @endif
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        hello
                     </div>
                 </div>
             </div>
 
-               <div class="col-lg-7">
+            <div class="col-lg-3">
+                <div class="list-group custom-list-group pl-5 pr-5">
+                    <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-cog"></i> Settings</a>
+                    <a href="{{route('lad.account.activitylog')}}" class="list-group-item list-group-item-action"><i class="fa fa-list"></i> Activity Log</a>
+                    <a href="#" class="list-group-item list-group-item-action">Authentication</a>
+                </div>
+            </div>
 
-                   <div class="card shadow-sm">
-                       <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <img src="{{ asset('lad/img/avator.jpg') }}" alt="avator" class="img-fluid rounded-circle shadow-sm" />
-                            </div>
-                            <div class="col-lg-9" style="text-transform: capitalize;">
-                                <h1>{{ $account->name }}</h1><hr />
-                                <h6>{{$account->userable->last_name.' '.$account->userable->first_name}}</h6>
-                            </div>
-                        </div>
-                       </div>
-                   </div>
+            
+             
 
-                    <!-- Authentication detial -->
-                    <div class="card d-none">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-12"><h6>Personal Details</h6><hr /></div>
-                                <div class="col-lg-12">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card d-none">
-                        <div class="card-body">
-                             <!-- Color Scheme Details -->
-                             @include('lad::core.includes.row.colorScheme')
-                        </div>
-                    </div>
-
-                   
-               </div>
-
-               <div class="col-lg-3">
+               <div class="col-lg-3 d-none">
                    <div class="card">
                        <div class="card-header">
                            <h6 class="card-title mb-0">Change Password</h6>

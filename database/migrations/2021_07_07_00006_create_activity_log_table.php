@@ -17,6 +17,7 @@ class CreateActivityLogTable extends Migration
             $table->increments('id');
             $table->string('action')->nullable();
             $table->text('activity_log');
+            $table->enum('content_type', ['text','html'])->default('text');
             $table->nullableMorphs('loggable');
             $table->timestamps();
         });

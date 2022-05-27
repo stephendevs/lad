@@ -144,13 +144,13 @@
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
               <a class="dropdown-item" href="{{ route('lad.account') }}">
                 <i class="fa fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Profile
+                Account
               </a>
-              <a class="dropdown-item fs" href="{{ route('lad.account.settings') }}">
+              <a class="dropdown-item" href="{{ route('lad.account.settings') }}">
                 <i class="fa fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                 Settings
               </a>
-              <a class="dropdown-item fs" href="">
+              <a class="dropdown-item" href="{{ route('lad.account.activitylog') }}">
                 <i class="fa fa-list fa-sm fa-fw mr-2 text-gray-400 fs"></i>
                 Activity Log
               </a>

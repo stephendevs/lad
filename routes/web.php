@@ -51,8 +51,12 @@ Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
         Route::get('/', [DashboardController::class, 'index'])->name('lad.dashboard');
 
         Route::get('/account', [AccountController::class, 'index'])->name('lad.account');
+        Route::get('/account/activitylog', [AccountController::class, 'activityLog'])->name('lad.account.activitylog');
+
         Route::post('/account/change/password', [AccountController::class, 'changePassword'])->name('lad.account.change.password');
+
         Route::get('/account/settings', [AccountSettingController::class, 'index'])->name('lad.account.settings');
+        
         Route::get('/account/notifications', [AccountNotificationController::class, 'index'])->name('lad.account.notifications');
 
        Route::get('/account/status/alert', [AccountStatusController::class, 'index'])->name('ldashboardAccountBlockedAlert');
@@ -85,6 +89,7 @@ Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
 
 
         Route::get('/users', [UserController::class, 'index'])->name('lad.users');
+        Route::post('/users/create', [UserController::class, 'store'])->name('lad.users.store');
 
 
         Route::get('/artisans', [ArtisanController::class, 'index'])->name('lad.artisans');

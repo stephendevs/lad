@@ -25,6 +25,13 @@ class AccountController extends Controller
         return view('lad::account.index', compact(['account']));
     }
 
+    public function activityLog()
+    {
+        $account = auth()->user();
+        $activitylog = $account->activitylog()->paginate(4);
+        return (request()->expectsJson()) ? response()->json(['account' => $account, 'activitylog' => $activitylog]) :  view('lad::account.activitylog.index', compact(['account', 'activitylog']));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

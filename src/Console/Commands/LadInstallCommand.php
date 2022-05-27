@@ -55,8 +55,8 @@ class LadInstallCommand extends Command
         ]);
         $this->call('vendor:publish', ['--tag' => 'lad-config']);
         $this->call('vendor:publish', ['--tag' => 'lad-assets']);
-
         $this->call('passport:install');
+
        
     }
 

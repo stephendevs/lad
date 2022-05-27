@@ -16,7 +16,6 @@ class AccountSettingController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:'.config('lad.auth_guard', 'admin'));
     }
     /**
      * Display admin account info.

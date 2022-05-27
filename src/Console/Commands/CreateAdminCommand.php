@@ -16,7 +16,7 @@ class CreateAdminCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'create:admin {--super} {--default}';
+    protected $signature = 'create:admin {--super} {--default} {--generated}';
 
     /**
      * The console command description.
@@ -48,42 +48,22 @@ class CreateAdminCommand extends Command
 
     private function createAdmin($superadmin = false, $default = false)
     {
-        $admin = new Admin();
-
         if ($default) {
-            $admin->first_name = 'stephen';
-            $admin->last_name = 'omoding';
-
-            $email = 'admin@lad.com';
-            $password = bcrypt('secret');
-        } else {
-            # code...
-            $first_name = $this->ask('Enter First Name ..');
-            $last_name = $this->ask('Enter Last Name .. ');
-            $email = $this->ask('Enter email Address .. No spacing');
-            $password = $this->ask('Enter Password .. No spacing');
-
-            $admin->first_name = $first_name;
-            $admin->last_name = $last_name;
-        }
-
-        //Display admin info for confirmation
-        $this->line('Please confirm the info below before proceding...');
-        $this->info($admin);
-
-        if($this->confirm('Enter y to procede')){
-            $save = $admin->save();
+            $admin = Admin::create([
+                'first_name' => 'Stephen Okello',
+                'last_name' => 'Omoding',
+            ]);
             $admin->user()->create([
                 'name' => str_replace(' ', '.', $admin->last_name.' '.$admin->last_name),
-                'email' => $email,
-                'password' => bcrypt($password),
+                'email' => 'stephen.okello@lad.com',
+                'password' => bcrypt('secret'),
                 'email_verified_at' => now(),
                 'remember_token' => Str::random(10)
             ]);
-            $this->line($admin);
-            $this->info('Admin Created Successfully');
-            ($superadmin == true) ? $this->superAdminPermissions($admin) : '';
-        }
+            $this->info('To login use Email: stephen.okello@lad.com & Password: secret');
+            return;
+        } 
+
     }
 
     private function superAdminPermissions($admin)
