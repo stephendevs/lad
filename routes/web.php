@@ -37,13 +37,12 @@ Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
     Route::group(['middleware' => ['web','guest:auth']], function(){
         Route::get('/login', [AuthController::class, 'index'])->name('lad.login');
         Route::post('/login', [AuthController::class, 'login'])->name('lad.login');
+        Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('lad.password.resetEmailForm');
+        Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('lad.password.reset.link');
     });
 
     Route::group(['middleware' => ['web','auth']], function(){
         Route::post('/logout', [AuthController::class, 'logout'])->name('lad.logout');
-
-        Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('lad.password.resetEmailForm');
-        Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('lad.password.reset.link');
 
         Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('lad.password.resetForm');
         Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('lad.password.reset');
@@ -100,13 +99,11 @@ Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
         Route::post('/cli', [CliController::class, 'run'])->middleware('permission:cmd')->name('lad.cli');
 
 
-
-
         /**
          * Dashboard Settings
          */
-        Route::get('/system-settings', [SettingController::class, 'index'])->middleware(['permission:configure_system_settings'])->name('lad.settings');
-        Route::post('/system-settings/change', [SettingController::class, 'store'])->middleware(['permission:configure_system_settings'])->name('lad.settings.change');
+        Route::get('/system-settings', [SettingController::class, 'index'])->name('lad.settings');
+        Route::post('/system-settings/change', [SettingController::class, 'store'])->name('lad.settings.change');
 
 
         //Mail module for sending emails.
@@ -119,6 +116,7 @@ Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
         Route::post('/contact-us/sendmail', [TestController::class, 'send'])->name('lad.test');
 
         Route::get('/contact-us/render', [TestController::class, 'render']);
+        
     });
 });
 

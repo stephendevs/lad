@@ -62,21 +62,7 @@ return [
     'manage_user_permissions' => 'Manages user permissions'
 ],
 
-
-   /*
-  |--------------------------------------------------------------------------
-  | Other package links 
-  | Blades holding nav-item for sidebar
-  |--------------------------------------------------------------------------
-  */
-  'sidebar_navitems' => [
-    'srt::lad.sidebar.students',
-    'srt::lad.sidebar.sets',
-    'srt::lad.sidebar.courses',
-    'srt::lad.sidebar.requiremments',
-  ],
-
-  'pagman' => true,
+'packages' => ['pagman']
 
 
 ];

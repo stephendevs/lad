@@ -17,6 +17,30 @@ With proper DB Configurations run `php artisan migrate` to the migrate you Datab
 php artisan migrate
 php artisan create:admin --default
 ```
+### Redirecting Unauthenticated Users
+Modify the redirect behaviour to point to `dashboard\login` for unauthenticated users by updating the redirectTo function in your `App\Http\Middleware\Authenticate` file to return `route('lad.login)`
+```php
+<?php
+namespace App\Http\Middleware;
+
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
+
+class Authenticate extends Middleware
+{
+    /**
+     * Get the path the user should be redirected to when they are not authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string|null
+     */
+    protected function redirectTo($request)
+    {
+        if (! $request->expectsJson()) {
+            return route('lad.login');
+        }
+    }
+}
+```
 Access your login page via `yourdomain.com/dashboard/login`
 
 ---

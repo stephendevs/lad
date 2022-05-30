@@ -104,23 +104,6 @@
                 <i class="fa fa-cog fa-sm fa-fw mr-2 text-gray-400"></i>
                 System Settings
               </a>
-              <a class="dropdown-item fs" href="{{ route('lad.account.settings') }}">
-                <i class="fa fa-cube fa-sm fa-fw mr-2 text-gray-400"></i>
-                Modules
-              </a>
-              <a class="dropdown-item fs" href="{{ route('lad.cli') }}">
-                <i class="fa fa-terminal fa-sm fa-fw mr-2 text-gray-400"></i>
-                Command Line
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item fs" href="{{ route('lad.mailer') }}">
-                <i class="fa fa-envelope fa-sm fa-fw mr-2 text-gray-400"></i>
-                Mailer
-              </a>
-              <a class="dropdown-item fs" href="{{ route('lad.account.settings') }}">
-                <i class="fa fa-cube fa-sm fa-fw mr-2 text-gray-400"></i>
-                Mail Templates
-              </a>
               <a class="dropdown-item" href="{{ route('lad.admins') }}">
                 <i class="fa fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Administrators

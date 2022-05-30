@@ -22,22 +22,51 @@
   
     <!-- Divider -->
     <!--<hr class="sidebar-divider">-->
-  
-    <!-- include sidebar navitem links for other integrated packages or modules -->
-    @if (config('lad.pagman', false))
-        @if (count(config('pagman.sidebar_navitems', [])))
-          @php
-              $navitems = config('pagman.sidebar_navitems', []);
-          @endphp
-          @for ($i = 0; $i < count($navitems); $i++)
-            @includeIf($navitems[$i])
-          @endfor
-        @endif
+
+    <!-- Pagman Package -->
+    @if (in_array('pagman', config('lad.packages', [])))
+    <li class="nav-item sidebar-nav-item ">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#posts" aria-expanded="true" aria-controls="posts">
+        <i class="fa fa-television sidebar-icon"></i>
+        <span>Posts</span>
+      </a>
+      <div id="posts" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item dev" href="{{ route('pagman.posts') }}">{{ __('All Posts') }}</a>
+          <a class="collapse-item dev" href="{{ route('pagman.posts.create') }}">{{ __('Add New') }}</a>
+          <a class="collapse-item dev" href="{{ route('pagman.categories') }}">{{ __('Categories') }}</a>
+        </div>
+      </div>
+    </li>
+    <!-- Nav Item - Pages -->
+    <li class="nav-item sidebar-nav-item">
+      <a class="nav-link" href="{{ route('pagman.pages') }}">
+        <i class="fa fa-square-o"></i>
+        <span>Pages</span></a>
+    </li>
+    <!-- Nav Item - Posts -->
+    <li class="nav-item sidebar-nav-item">
+      <a class="nav-link" href="{{ route('pagman.media') }}">
+        <i class="fa fa-camera"></i>
+        <span>Media</span></a>
+    </li>
+    <!-- -->
+<li class="nav-item sidebar-nav-item ">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pageManagerMenu" aria-expanded="true" aria-controls="pageManagerMenu">
+    <i class="fa fa-television sidebar-icon"></i>
+    <span>Web</span>
+  </a>
+  <div id="pageManagerMenu" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div class="bg-white py-2 collapse-inner rounded">
+      <a class="collapse-item dev" href="{{ route('pagman.theme.options') }}">{{ __('Theme Options | Settings') }}</a>
+    </div>
+  </div>
+</li>
     @endif
+  
 
   
     <!-- Divider -->
-    <!--<hr class="sidebar-divider d-none d-md-block">-->
 
      <!-- Users Nav Item - Pages Collapse Menu -->
      <li class="nav-item sidebar-nav-item">
