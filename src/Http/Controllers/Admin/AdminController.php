@@ -126,7 +126,10 @@ class AdminController extends Controller
             'email' => $request->email
         ]);
 
-        return ($request->expectsJson()) ? response()->json($admin) : back()->withInput()->with('updated', 'Admin Edited successfully.');
+        return ($request->expectsJson()) ? response()->json([
+            'message' => 'Admin details updated successfully',
+            'admin' => $admin
+        ]) : back()->withInput()->with('updated', 'Admin Edited successfully.');
     }
 
     /**
@@ -163,7 +166,9 @@ class AdminController extends Controller
         $admin->user()->update([
             'password' => bcrypt($request->password)
         ]);
-        return (request()->expectsJson()) ? response()->json(['message' => 'Updated']) : back()->withInput()->with('updated', 'Password updated successfully');
+        return (request()->expectsJson()) ? response()->json([
+            'message' => 'Password changed successfully'
+        ], 200) : back()->withInput()->with('updated', 'Password updated successfully');
     }
 
 }

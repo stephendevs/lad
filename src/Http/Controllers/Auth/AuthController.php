@@ -28,7 +28,6 @@ class AuthController extends Controller
         * @var string
         */
         $this->redirectTo = config('lad.route_prefix', '/dashboard');
-        $this->middleware('guest')->except(['logout','resetPassword','resetPwd']);
     }
 
 
@@ -87,6 +86,41 @@ class AuthController extends Controller
         }
 
     }
+
+    
+    /**
+     * API Login.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function apiLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $user = Auth::user(); 
+
+            $success['token'] =  $user->createToken('token')->accessToken; 
+            return response()->json($success, 200); 
+        }
+        return response()->json(['error'=>'Unauthenticated Please check your email and password'], 401); 
+    }
+
+    public function apiLogout(Request $request)
+    {
+        $success['message'] = "Successfully logged out.";
+        $error = "Something went wrong.";
+
+        $logout = $request->user()->token()->revoke();
+        return ($logout) ? response()->json($success, 200) : response()->json(['error' => $error], 401);
+    }
+
 
 
 

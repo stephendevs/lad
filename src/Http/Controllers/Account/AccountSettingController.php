@@ -24,7 +24,7 @@ class AccountSettingController extends Controller
      */
     public function index()
     {
-        return view('lad::account.settings.index');
+        return (request()->expectsJson()) ? response()->json(['settings' => 'Hello']) : view('lad::account.settings.index');
     }
 
     /**

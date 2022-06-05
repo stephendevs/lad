@@ -32,6 +32,8 @@ use Stephendevs\Lad\Http\Controllers\Mailer\ContactFormController;
 use Stephendevs\Lad\Http\Controllers\Mailer\MailTemplatesController;
 use Stephendevs\Lad\Http\Controllers\Mailer\TestContactFormController;
 
+
+
 Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
 
     Route::group(['middleware' => ['web','guest:auth']], function(){
@@ -51,9 +53,7 @@ Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
 
         Route::get('/account', [AccountController::class, 'index'])->name('lad.account');
         Route::get('/account/activitylog', [AccountController::class, 'activityLog'])->name('lad.account.activitylog');
-
         Route::post('/account/change/password', [AccountController::class, 'changePassword'])->name('lad.account.change.password');
-
         Route::get('/account/settings', [AccountSettingController::class, 'index'])->name('lad.account.settings');
         
         Route::get('/account/notifications', [AccountNotificationController::class, 'index'])->name('lad.account.notifications');
@@ -68,19 +68,9 @@ Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
         Route::get('/admins/{username}/{id}', [AdminController::class, 'show'])->name('lad.admins.show');
         Route::get('/admins/edit/{username}/{id}', [AdminController::class, 'edit'])->name('lad.admins.edit');
         Route::post('/admins/update/{id}', [AdminController::class, 'update'])->name('lad.admins.update');
-        Route::get('/admins/trash/{id}', [AdminController::class, 'destroy'])->name('lad.admins.destroy');
-
+        Route::get('/admins/trashdestroy/{id}', [AdminController::class, 'destroy'])->name('lad.admins.destroy');
         Route::post('/admins/change/password/{id}', [AdminController::class, 'changePassword'])->name('lad.admins.change.password');
-
         Route::get('/admins/{username}/activitylog', [AdminController::class, 'index'])->name('lad.admins.activitylog');
-
-
-        Route::get('/admins/blocked', [AdminStatusController::class, 'index'])->name('ldashboardAdminsBlocked')->middleware('issuperadmin');
-        Route::get('/admin/blocked/{id}', [AdminStatusController::class, 'show'])->name('ldashboardAdminBlocked')->middleware('issuperadmin');
-        Route::post('/admin/block/{id}', [AdminStatusController::class, 'block'])->name('ldashboardAdminBlock')->middleware('issuperadmin');
-        Route::post('/admin/unblock/{id}', [AdminStatusController::class, 'unblock'])->name('ldashboardAdminUnblock')->middleware('issuperadmin');
-
-        Route::get('/ajax/admins/table', [AdminController::class, 'table'])->name('lad.admins.table')->middleware('issuperadmin');
 
         Route::get('/admins/{username}/permissions/{id}', [AdminPermissionController::class, 'index'])->middleware(['permission:manage_user_permissions'])->name('lad.admins.permissions');
 
@@ -118,5 +108,36 @@ Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
         Route::get('/contact-us/render', [TestController::class, 'render']);
         
     });
+
 });
 
+Route::group(['prefix' => 'api'], function(){
+   Route::group(['prefix' => config('lad.route_prefix', 'dashboard')], function(){
+
+       Route::group(['middleware' => ['api','guest:api']], function(){
+           Route::post('/login', [AuthController::class, 'apiLogin']);
+       });
+
+       Route::group(['middleware' => ['api','auth:api']], function(){
+
+        Route::post('/logout', [AuthController::class, 'apiLogout']);
+
+        Route::get('/account', [AccountController::class, 'index']);
+        Route::get('/account/activitylog', [AccountController::class, 'activityLog']);
+        Route::get('/account/settings', [AccountSettingController::class, 'index']);
+        Route::post('/account/change/password', [AccountController::class, 'changePassword']);
+
+        Route::get('/admins', [AdminController::class, 'index']);
+        Route::post('/admins/store', [AdminController::class, 'store']);
+        Route::get('/admins/{username}/{id}', [AdminController::class, 'show']);
+        Route::post('/admins/update/{id}', [AdminController::class, 'update']);
+        Route::get('/admins/destroy/{id}', [AdminController::class, 'destroy']);
+        Route::post('/admins/change/password/{id}', [AdminController::class, 'changePassword']);
+
+        Route::get('/system-settings', [SettingController::class, 'index']);
+        Route::post('/system-settings/change', [SettingController::class, 'store']);
+
+       });
+
+   });
+});

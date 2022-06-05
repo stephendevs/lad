@@ -21,7 +21,7 @@ class SettingController extends Controller
     public function index()
     {
         $options =  $this->getOptions();
-        return view('lad::settings.index', compact(['options']));
+        return (request()->expectsJson()) ? response()->json(['settings' => $options]) : view('lad::settings.index', compact(['options']));
     }
 
     protected function options() : array 

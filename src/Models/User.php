@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +14,7 @@ use Stephendevs\Lad\HasActivityLog;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasUserType, HasRoles,HasPermissions, HasActivityLog;
+    use HasApiTokens, Notifiable, HasUserType, HasRoles,HasPermissions, HasActivityLog;
     /**
      * The attributes that are mass assignable.
      *

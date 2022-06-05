@@ -5,14 +5,13 @@ namespace Stephendevs\Lad\Http\Controllers\Account;
 use Stephendevs\Lad\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\User;
+
 class AccountController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware([
-            'auth','usertype:admin'
-        ]);
     }
     /**
      * Display admin account info.
@@ -22,7 +21,7 @@ class AccountController extends Controller
     public function index()
     {
         $account = auth()->user();
-        return view('lad::account.index', compact(['account']));
+        return (request()->expectsJson()) ? response()->json(['account' => $account]) : view('lad::account.index', compact(['account']));
     }
 
     public function activityLog()
@@ -80,7 +79,7 @@ class AccountController extends Controller
         auth()->user()->update([
             'password' => bcrypt($request->password)
         ]);
-        return back()->withInput()->with('updated', 'Password changed successfully');
+        return ($request->expectsJson()) ? response()->json(['message' => 'Password changed successfully']) : back()->withInput()->with('updated', 'Password changed successfully');
     }
     
 }

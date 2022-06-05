@@ -55,7 +55,7 @@ class CreateAdminCommand extends Command
             ]);
             $admin->user()->create([
                 'name' => str_replace(' ', '.', $admin->last_name.' '.$admin->last_name),
-                'email' => 'stephen.okello@lad.com',
+                'email' => 'stephen.okello@gmail.com',
                 'password' => bcrypt('secret'),
                 'email_verified_at' => now(),
                 'remember_token' => Str::random(10)
